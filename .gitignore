@@ -37,3 +37,9 @@ loganalytics.json
 **/terraform-provider-kubernetes
 **/*.tfstate*
 debug
+
+# GoLand files
+.idea
+
+# TLS artifacts
+hack/certs

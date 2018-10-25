@@ -163,6 +163,14 @@
   version = "v1.13.46"
 
 [[projects]]
+  branch = "master"
+  digest = "1:707ebe952a8b3d00b343c01536c79c73771d100f63ec6babeaed5c79e2b8a8dd"
+  name = "github.com/beorn7/perks"
+  packages = ["quantile"]
+  pruneopts = "NUT"
+  revision = "3a771d992973f24aa725d07868b467d1ddfceafb"
+
+[[projects]]
   digest = "1:97b8422f271b83e760ce1279715d0f5d124f267459b56806306a64a0f82721c9"
   name = "github.com/cenkalti/backoff"
   packages = ["."]
@@ -740,6 +748,47 @@
   revision = "3fdea8d05856a0c8df22ed4bc71b3219245e4485"
 
 [[projects]]
+  digest = "1:5985ef4caf91ece5d54817c11ea25f182697534f8ae6521eadcd628c142ac4b6"
+  name = "github.com/matttproud/golang_protobuf_extensions"
+  packages = ["pbutil"]
+  pruneopts = "NUT"
+  revision = "c12348ce28de40eed0136aa2b644d0ee0650e56c"
+  version = "v1.0.1"
+
+[[projects]]
+  digest = "1:1c93811fa97b7b15d18ff4e59e922ec1b32e7e5854a396d372e4fc1aa811ff9d"
+  name = "github.com/mesos/mesos-go"
+  packages = [
+    "api/v1/lib",
+    "api/v1/lib/backoff",
+    "api/v1/lib/client",
+    "api/v1/lib/debug",
+    "api/v1/lib/encoding",
+    "api/v1/lib/encoding/codecs",
+    "api/v1/lib/encoding/framing",
+    "api/v1/lib/encoding/json",
+    "api/v1/lib/encoding/proto",
+    "api/v1/lib/extras/metrics",
+    "api/v1/lib/extras/scheduler/callrules",
+    "api/v1/lib/extras/scheduler/controller",
+    "api/v1/lib/extras/scheduler/eventrules",
+    "api/v1/lib/extras/store",
+    "api/v1/lib/httpcli",
+    "api/v1/lib/httpcli/apierrors",
+    "api/v1/lib/httpcli/httpsched",
+    "api/v1/lib/recordio",
+    "api/v1/lib/resourcefilters",
+    "api/v1/lib/resources",
+    "api/v1/lib/roles",
+    "api/v1/lib/scheduler",
+    "api/v1/lib/scheduler/calls",
+    "api/v1/lib/scheduler/events",
+  ]
+  pruneopts = "NUT"
+  revision = "7ec2a64a36fe5bc22d3701558bc9aa1ac6acfac5"
+  version = "v0.0.8"
+
+[[projects]]
   branch = "master"
   digest = "1:b62c4f18ad6eb454ac5253e7791ded3d7867330015ca4b37b6336e57f514585e"
   name = "github.com/mitchellh/go-homedir"
@@ -838,6 +887,62 @@
   pruneopts = "NUT"
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
   version = "v1.0.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:9d9989e96f765584e1b58e7f23e1b94740deb282fd363e5e7c5b5e30ae7b7c2c"
+  name = "github.com/pquerna/ffjson"
+  packages = [
+    "fflib/v1",
+    "fflib/v1/internal",
+  ]
+  pruneopts = "NUT"
+  revision = "af8b230fcd2007c7095168ca8ab94c68b60840c6"
+
+[[projects]]
+  digest = "1:aa2da1df3327c3a338bb42f978407c07de74cd0a5bef35e9411881dffd444214"
+  name = "github.com/prometheus/client_golang"
+  packages = [
+    "prometheus",
+    "prometheus/internal",
+    "prometheus/promhttp",
+  ]
+  pruneopts = "NUT"
+  revision = "1cafe34db7fdec6022e17e00e1c1ea501022f3e4"
+  version = "v0.9.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:2d5cd61daa5565187e1d96bae64dbbc6080dacf741448e9629c64fd93203b0d4"
+  name = "github.com/prometheus/client_model"
+  packages = ["go"]
+  pruneopts = "NUT"
+  revision = "5c3871d89910bfb32f5fcab2aa4b9ec68e65a99f"
+
+[[projects]]
+  branch = "master"
+  digest = "1:06375f3b602de9c99fa99b8484f0e949fd5273e6e9c6592b5a0dd4cd9085f3ea"
+  name = "github.com/prometheus/common"
+  packages = [
+    "expfmt",
+    "internal/bitbucket.org/ww/goautoneg",
+    "model",
+  ]
+  pruneopts = "NUT"
+  revision = "7e9e6cabbd393fc208072eedef99188d0ce788b6"
+
+[[projects]]
+  branch = "master"
+  digest = "1:102dea0c03a915acfc634b7c67f2662012b5483b56d9025e33f5188e112759b6"
+  name = "github.com/prometheus/procfs"
+  packages = [
+    ".",
+    "internal/util",
+    "nfs",
+    "xfs",
+  ]
+  pruneopts = "NUT"
+  revision = "185b4288413d2a0dd0806f78c90dde719829e5ae"
 
 [[projects]]
   digest = "1:6bc0652ea6e39e22ccd522458b8bdd8665bf23bdc5a20eec90056e4dc7e273ca"
@@ -984,7 +1089,7 @@
 
 [[projects]]
   branch = "feature/wolfpack"
-  digest = "1:68a024f57bd12460c4a50d28f21066401fceaf741088252fea358815b8afc855"
+  digest = "1:79b933ce82b0a5da2678624d52d714deff91854904e8649889dc83be36907dc5"
   name = "github.com/vmware/vic"
   packages = [
     "lib/apiservers/engine/backends/cache",
@@ -1030,7 +1135,7 @@
     "pkg/vsphere/sys",
   ]
   pruneopts = "NUT"
-  revision = "0fd01769dd5f4077763f3426a830709a9e986f1e"
+  revision = "c7d40ac878b09c577c307bc5331c7dd39619ed7c"
 
 [[projects]]
   branch = "master"
@@ -1552,6 +1657,7 @@
     "github.com/docker/go-connections/nat",
     "github.com/docker/go-connections/sockets",
     "github.com/docker/go-connections/tlsconfig",
+    "github.com/gogo/protobuf/proto",
     "github.com/google/uuid",
     "github.com/gorilla/mux",
     "github.com/gorilla/websocket",
@@ -1569,8 +1675,25 @@
     "github.com/hyperhq/hypercli/registry",
     "github.com/kr/pretty",
     "github.com/lawrencegripper/pod2docker",
+    "github.com/mesos/mesos-go/api/v1/lib",
+    "github.com/mesos/mesos-go/api/v1/lib/backoff",
+    "github.com/mesos/mesos-go/api/v1/lib/encoding",
+    "github.com/mesos/mesos-go/api/v1/lib/encoding/codecs",
+    "github.com/mesos/mesos-go/api/v1/lib/extras/metrics",
+    "github.com/mesos/mesos-go/api/v1/lib/extras/scheduler/callrules",
+    "github.com/mesos/mesos-go/api/v1/lib/extras/scheduler/controller",
+    "github.com/mesos/mesos-go/api/v1/lib/extras/scheduler/eventrules",
+    "github.com/mesos/mesos-go/api/v1/lib/extras/store",
+    "github.com/mesos/mesos-go/api/v1/lib/httpcli",
+    "github.com/mesos/mesos-go/api/v1/lib/httpcli/httpsched",
+    "github.com/mesos/mesos-go/api/v1/lib/resources",
+    "github.com/mesos/mesos-go/api/v1/lib/scheduler",
+    "github.com/mesos/mesos-go/api/v1/lib/scheduler/calls",
+    "github.com/mesos/mesos-go/api/v1/lib/scheduler/events",
     "github.com/mitchellh/go-homedir",
     "github.com/pkg/errors",
+    "github.com/prometheus/client_golang/prometheus",
+    "github.com/prometheus/client_golang/prometheus/promhttp",
     "github.com/spf13/cobra",
     "github.com/spf13/viper",
     "github.com/stretchr/testify/assert",

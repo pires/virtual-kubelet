@@ -1,0 +1,10 @@
+# example configuration file for virtual-kubelet Mesos provider
+
+cpu = "100"
+memory = "100Gi"
+storage = "1024Gi"
+pods = "50"
+
+[scheduler]
+mesosUrl = "http://mesos:5050/api/v1/scheduler"
+verbose = true

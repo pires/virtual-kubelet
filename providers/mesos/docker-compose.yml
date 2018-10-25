@@ -1,0 +1,52 @@
+version: '3.5'
+services:
+  etcd:
+    image: quay.io/coreos/etcd:v3.3.10
+    command:
+    - /usr/local/bin/etcd
+    - --listen-client-urls=http://0.0.0.0:2379
+    - --advertise-client-urls=http://0.0.0.0:2379"
+    ports:
+      - "2379:2379"
+      - "2380:2380"
+  kube-apiserver:
+    depends_on:
+      - etcd
+    image: k8s.gcr.io/kube-apiserver-amd64:v1.12.2
+    command:
+    - kube-apiserver
+    - --etcd-servers=http://etcd:2379
+    - --insecure-bind-address=0.0.0.0
+    - --insecure-port=8181
+    - --kubelet-https=false
+    - --tls-cert-file=/tls/kube-apiserver-crt.pem
+    - --tls-private-key-file=/tls/kube-apiserver-key.pem
+    - --service-account-key-file=/tls/service-account.pem
+    ports:
+    - "8181:8181"
+    volumes:
+    - ./hack/certs:/tls
+  kube-controller-manager:
+    depends_on:
+    - kube-apiserver
+    image: k8s.gcr.io/kube-controller-manager-amd64:v1.12.2
+    command:
+    - kube-controller-manager
+    - --master=http://kube-apiserver:8181
+    - --service-account-private-key-file=/tls/service-account-key.pem
+    volumes:
+    - ./hack/certs:/tls
+  kube-scheduler:
+    depends_on:
+    - kube-apiserver
+    image: k8s.gcr.io/kube-scheduler-amd64:v1.12.2
+    command:
+    - kube-scheduler
+    - --master=http://kube-apiserver:8181
+  mesos:
+    privileged: true
+    image: mesos/mesos-mini:2018-10-25
+    ports:
+    - "5050:5050"
+    - "5051:5051"
+    - "8080:8080"
