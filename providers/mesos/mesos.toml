@@ -8,3 +8,4 @@ pods = "50"
 [scheduler]
 mesosUrl = "http://mesos:5050/api/v1/scheduler"
 verbose = true
+failoverTimeout = 10000000000
