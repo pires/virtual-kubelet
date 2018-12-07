@@ -72,6 +72,7 @@ func newStateStore(schedulerConfig *Config) *stateStore {
 		metricsAPI:    initMetrics(*schedulerConfig),
 		newPodMap:     NewMesosPodMap(),
 		runningPodMap: NewMesosPodMap(),
+		deletedPodMap: NewMesosPodMap(),
 	}
 }
 
@@ -84,4 +85,5 @@ type stateStore struct {
 	err           error
 	newPodMap     *MesosPodMap
 	runningPodMap *MesosPodMap
+	deletedPodMap *MesosPodMap
 }

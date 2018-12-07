@@ -255,9 +255,7 @@ root       925   923  0 14:22 ?        00:00:00  \_ nginx: master process nginx 
 100        926   925  0 14:22 ?        00:00:00      \_ nginx: worker process
 ```
 
-## Cleanup
-
-### Remove test pods
+## Delete the test pod
 
 First, be sure to be inside the development container:
 
@@ -265,14 +263,13 @@ First, be sure to be inside the development container:
 $ docker exec -it vkdev bash
 ```
 
-Next, **forcibly** remove the pod:
+Next, remove the pod:
 
 ```shell
-$ /kubectl --kubeconfig=kubeconfig delete pod nginx --force
+$ /kubectl --kubeconfig=kubeconfig delete pod nginx
 ```
 
-**Attention**: This **WILL NOT** terminate the Mesos task.
-In the future, such behavior will be added.
+## Cleanup
 
 ### Tear-down development infrastructure
 
