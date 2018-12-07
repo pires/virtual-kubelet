@@ -9,8 +9,10 @@ import (
 )
 
 type mesosPod struct {
-	pod   *corev1.Pod
-	tasks []mesos.TaskInfo
+	pod      *corev1.Pod
+	agentId  *mesos.AgentID
+	executor *mesos.ExecutorInfo
+	tasks    []mesos.TaskInfo
 }
 
 type MesosPodMap struct {

@@ -126,14 +126,53 @@ func (sched *mesosScheduler) AddPod(pod *corev1.Pod) error {
 		return err
 	}
 
-	sched.store.newPodMap.Set(podKey, &mesosPod{pod, buildPodTasks(pod)})
+	sched.store.newPodMap.Set(podKey, &mesosPod{
+		pod:   pod,
+		tasks: buildPodTasks(pod),
+	})
 
 	return nil
 }
 func (sched *mesosScheduler) DeletePod(pod *corev1.Pod) error {
-	// TODO signal pod delete
-	return errors.New("TODO")
+	podKey, err := buildPodNameFromPod(pod)
+	if err != nil {
+		return err
+	}
+
+	shutdownCall := func(mesosPod *mesosPod) error {
+		log.Printf(
+			"shutting down executor %q on agent %q",
+			mesosPod.executor.ExecutorID.Value,
+			mesosPod.agentId.Value)
+
+		shutdown := calls.Shutdown(
+			mesosPod.executor.ExecutorID.Value,
+			mesosPod.agentId.Value)
+
+		return calls.CallNoData(context.Background(), sched.store.cli, shutdown)
+	}
+
+	mesosPod, ok := sched.store.deletedPodMap.Get(podKey)
+	if ok {
+		return shutdownCall(mesosPod)
+	}
+
+	mesosPod, ok = sched.store.newPodMap.GetAndRemove(podKey)
+	if ok {
+		sched.store.deletedPodMap.Set(podKey, mesosPod)
+		log.Printf("pending pod %q has been deleted\n", podKey)
+		return nil
+	}
+
+	mesosPod, ok = sched.store.runningPodMap.GetAndRemove(podKey)
+	if ok {
+		sched.store.deletedPodMap.Set(podKey, mesosPod)
+		return shutdownCall(mesosPod)
+	}
+
+	return fmt.Errorf("pod %q cannot be found\n", podKey)
 }
+
 func (sched *mesosScheduler) UpdatePod(pod *corev1.Pod) error {
 	// TODO signal pod update
 	return errors.New("TODO")
@@ -300,6 +339,9 @@ func resourceOffers(store *stateStore) events.HandlerFunc {
 			}()
 			executorInfo.ExecutorID = mesos.ExecutorID{Value: "exec-" + firstNewPodName}
 			executorInfo.Resources = found
+			pod.executor = &executorInfo
+			pod.agentId = &offers[i].AgentID
+
 			remainingOfferedResources.Subtract(found...)
 			flattened = remainingOfferedResources.ToUnreserved()
 

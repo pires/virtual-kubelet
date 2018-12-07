@@ -106,7 +106,7 @@ $ docker exec -it vkdev bash
 Second, be sure to have VK registered as a node:
 
 ```shell
-$ ./kubectl --kubeconfig=kubeconfig get nodes
+$ /kubectl --kubeconfig=kubeconfig get nodes
   NAME              STATUS   ROLES   AGE   VERSION
   virtual-kubelet   Ready    agent   22m   v1.11.2
 ```
@@ -114,7 +114,7 @@ $ ./kubectl --kubeconfig=kubeconfig get nodes
 Now, create the test pod:
 
 ```shell
-$ cat <<EOF | ./kubectl --kubeconfig ./kubeconfig create -f -
+$ cat <<EOF | /kubectl --kubeconfig ./kubeconfig create -f -
 apiVersion: v1
 kind: Pod
 metadata:
@@ -255,9 +255,7 @@ root       925   923  0 14:22 ?        00:00:00  \_ nginx: master process nginx 
 100        926   925  0 14:22 ?        00:00:00      \_ nginx: worker process
 ```
 
-## Cleanup
-
-### Remove test pods
+## Delete the test pod
 
 First, be sure to be inside the development container:
 
@@ -265,14 +263,13 @@ First, be sure to be inside the development container:
 $ docker exec -it vkdev bash
 ```
 
-Next, **forcibly** remove the pod:
+Next, remove the pod:
 
 ```shell
-$ ./kubectl --kubeconfig=kubeconfig delete pod nginx --force
+$ /kubectl --kubeconfig=kubeconfig delete pod nginx
 ```
 
-**Attention**: This **WILL NOT** terminate the Mesos task.
-In the future, such behavior will be added.
+## Cleanup
 
 ### Tear-down development infrastructure
 

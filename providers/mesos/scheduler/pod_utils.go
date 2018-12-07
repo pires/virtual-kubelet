@@ -101,7 +101,7 @@ func buildPodTasks(pod *corev1.Pod) []mesos.TaskInfo {
 }
 
 // buildDefaultExecutorInfo returns the protof of a default executor.
-func buildDefaultExecutorInfo(fid mesos.FrameworkID) (mesos.ExecutorInfo) {
+func buildDefaultExecutorInfo(fid mesos.FrameworkID) mesos.ExecutorInfo {
 	return mesos.ExecutorInfo{
 		Type:        mesos.ExecutorInfo_DEFAULT,
 		FrameworkID: &fid,
