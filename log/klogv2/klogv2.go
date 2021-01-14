@@ -32,17 +32,30 @@ import (
 // Ensure log.Logger is fully implemented during compile time.
 var _ log.Logger = (*adapter)(nil)
 
+type fieldMap struct {
+	log.Fields
+	processedFields string
+}
+
+func (f fieldMap) String() string {
+	// Process if not processed before.
+	if len(f.Fields) > 0 && len(f.processedFields) == 0 {
+		fmt.Println("processing fields")
+		f.processedFields = processFields(f.Fields)
+	}
+
+	return f.processedFields
+}
+
 // adapter implements the `log.Logger` interface for klogv2
 type adapter struct {
-	rawFields map[string]interface{}
-	fields    string
+	fields fieldMap
 }
 
 // New creates a new `log.Logger` from the provided entry
-func New(fields map[string]interface{}) log.Logger {
+func New(fields log.Fields) log.Logger {
 	return &adapter{
-		rawFields: fields,
-		fields:    processFields(fields),
+		fields: fieldMap{Fields: fields},
 	}
 }
 
@@ -107,7 +120,7 @@ func (l *adapter) WithField(key string, val interface{}) log.Logger {
 func (l *adapter) WithFields(fields log.Fields) log.Logger {
 	// Clone existing fields.
 	newFields := make(map[string]interface{})
-	for k, v := range l.rawFields {
+	for k, v := range l.fields {
 		newFields[k] = v
 	}
 	// Append new fields.
